@@ -55,9 +55,9 @@ def make_gif(images, fname, duration=2, true_image=False):
   clip.write_gif(fname, fps = len(images) / duration,verbose=False)
 
 def set_image_bandit(values,probs,selection,trial):
-    bandit_image = Image.open('bandit.png')
+    bandit_image = Image.open('./resources/bandit.png')
     draw = ImageDraw.Draw(bandit_image)
-    font = ImageFont.truetype("/Library/Fonts/Arial.ttf", 24)
+    font = ImageFont.truetype("./resources/FreeSans.ttf", 24)
     draw.text((40, 10),str(float("{0:.2f}".format(probs[0]))),(0,0,0),font=font)
     draw.text((130, 10),str(float("{0:.2f}".format(probs[1]))),(0,0,0),font=font)
     draw.text((60, 370),'Trial: ' + str(trial),(0,0,0),font=font)
@@ -69,14 +69,13 @@ def set_image_bandit(values,probs,selection,trial):
     
     
 def set_image_context(correct, observation,values,selection,trial):
-    obs = (1 - np.dstack([observation,observation,observation])) * 225.0
-    correct = np.reshape(correct,[28,28,1])
-    cor = (1 - np.dstack([correct,correct,correct])) * 225.0
-    obs = scipy.misc.imresize(obs,[100,200])
-    cor = scipy.misc.imresize(cor,[100,100])
-    bandit_image = Image.open('c_bandit.png')
+    obs = observation * 225.0
+    cor = correct * 225.0
+    obs = scipy.misc.imresize(obs,[100,200],interp='nearest')
+    cor = scipy.misc.imresize(cor,[100,100],interp='nearest')
+    bandit_image = Image.open('./resources/c_bandit.png')
     draw = ImageDraw.Draw(bandit_image)
-    font = ImageFont.truetype("./FreeSans.ttf", 24)
+    font = ImageFont.truetype("./resources/FreeSans.ttf", 24)
     draw.text((50, 360),'Trial: ' + str(trial),(0,0,0),font=font)
     draw.text((50, 330),'Reward: ' + str(values),(0,0,0),font=font)
     bandit_image = np.array(bandit_image)
@@ -87,13 +86,13 @@ def set_image_context(correct, observation,values,selection,trial):
 
 
 def set_image_gridworld(frame,color,reward,step):
-    a = scipy.misc.imresize(frame,[200,200])
+    a = scipy.misc.imresize(frame,[200,200],interp='nearest')
     b = np.ones([400,200,3]) * 255.0
     b[0:200,0:200,:] = a 
     b[200:210,0:200,:] = np.array(color) * 255.0
     b = Image.fromarray(b.astype('uint8'))
     draw = ImageDraw.Draw(b)
-    font = ImageFont.truetype("./FreeSans.ttf", 24)
+    font = ImageFont.truetype("./resources/FreeSans.ttf", 24)
     draw.text((40, 280),'Step: ' + str(step),(0,0,0),font=font)
     draw.text((40, 330),'Reward: ' + str(reward),(0,0,0),font=font)
     c = np.array(b)
