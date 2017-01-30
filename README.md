@@ -5,5 +5,5 @@ For more information, as well as explainations of each of the experiments, see m
 Contains iPython notebooks for:
 
 * **A3C-Meta-Bandit** - Set of bandit tasks described in paper. Including: Independent, Dependent, and Restless bandits.
-* **A3C-Meta-Context** - Contextual bandit task using randomized  MNIST digits to indicate reward-giving arm in each episode. 
+* **A3C-Meta-Context** - Rainbow bandit task using randomized colors to indicate reward-giving arm in each episode. 
 * **A3C-Meta-Grid** - Rainbow Gridworld task; a variation of gridworld in which goal colors are randomzied each episode and must be learned "on the fly."
