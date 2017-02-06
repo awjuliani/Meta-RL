@@ -62,8 +62,8 @@ def set_image_bandit(values,probs,selection,trial):
     draw.text((130, 10),str(float("{0:.2f}".format(probs[1]))),(0,0,0),font=font)
     draw.text((60, 370),'Trial: ' + str(trial),(0,0,0),font=font)
     bandit_image = np.array(bandit_image)
-    bandit_image[115:115+values[0]*2.5,20:75,:] = [0,255.0,0] 
-    bandit_image[115:115+values[1]*2.5,120:175,:] = [0,255.0,0]    
+    bandit_image[115:115+floor(values[0]*2.5),20:75,:] = [0,255.0,0] 
+    bandit_image[115:115+floor(values[1]*2.5),120:175,:] = [0,255.0,0]    
     bandit_image[101:107,10+(selection*95):10+(selection*95)+80,:] = [80.0,80.0,225.0]
     return bandit_image
     
